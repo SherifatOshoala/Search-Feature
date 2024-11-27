@@ -29,9 +29,9 @@ Comes pre-installed with Node.js.
 
 ---Setup Instructions--
 Clone the Repository
-git clone https://github.com/your-username/auction-items-search-api.git
+git clone https://github.com/SherifatOshoala/Search-Feature
 
-cd auction-items-search-api
+cd Search-Feature
 
 Install Dependencies
 npm install
