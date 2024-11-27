@@ -7,6 +7,8 @@ const sequelize = require('./config/sequelize')
 const user = require('./routes/user.routes')
 const admin = require('./routes/admin.routes')
 const invalidRoutes = require('./controllers/invalid')
+const swaggerUi = require('swagger-ui-express')
+const swaggerSpec = require("./config/swagger")
 
 const categories = require('./models/category.model')
 const auctionItems = require('./models/auction.model')
@@ -28,7 +30,7 @@ try {
     (async()=> {
       await sequelize.authenticate();
       // await sequelize.sync({alter:true});
-      console.log('Connection has been established successfully.');
+      console.log('Connection has been established successfully.')
       app.listen(port, () => {
         displayRoutes(app)
         console.log(`SearchFeature listening on port ${port}`) 
@@ -41,7 +43,9 @@ try {
   }
   
 
+  
 
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 
 
