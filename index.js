@@ -29,8 +29,8 @@ app.get('/', (req, res) =>{
 try {
     (async()=> {
       await sequelize.authenticate();
-      // await sequelize.sync({alter:true});
-      console.log('Connection has been established successfully.')
+      // await sequelize.sync({force:true});
+      console.log('Connection has been established successfully.');
       app.listen(port, () => {
         displayRoutes(app)
         console.log(`SearchFeature listening on port ${port}`) 
