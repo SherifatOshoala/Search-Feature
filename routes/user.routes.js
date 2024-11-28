@@ -121,10 +121,179 @@ const {getAuctionItems, addCategory, addAuctionItem} = require('../controllers/u
  */
 router.get('/auction-items', getAuctionItems)
 
-
+/**
+ * @swagger
+ * /add-category:
+ *   post:
+ *     summary: Add a new category
+ *     description: Create a new category with a name and optional description. Ensures unique category names.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: The name of the category.
+ *                 example: "Electronics"
+ *               description:
+ *                 type: string
+ *                 description: A brief description of the category.
+ *                 example: "Items related to electronic devices and gadgets."
+ *     responses:
+ *       200:
+ *         description: Category created successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "New category created successfully."
+ *       400:
+ *         description: Validation error or bad request.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: boolean
+ *                   example: false
+ *                 error:
+ *                   type: string
+ *                   example: "Category name is required."
+ *       409:
+ *         description: Conflict error when category already exists.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: boolean
+ *                   example: false
+ *                 error:
+ *                   type: string
+ *                   example: "Category already exists."
+ *       500:
+ *         description: Internal server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: boolean
+ *                   example: false
+ *                 error:
+ *                   type: string
+ *                   example: "Internal server error."
+ */
 router.post('/add-category', addCategory)
 
-
+/**
+ * @swagger
+ * /add-item:
+ *   post:
+ *     summary: Add a new auction item
+ *     description: Create a new auction item with details like name, condition, description, price, photo, category, and auction time.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               item_name:
+ *                 type: string
+ *                 description: Name of the auction item.
+ *                 example: "Vintage Leather Jacket"
+ *               item_condition:
+ *                 type: string
+ *                 description: Condition of the item (e.g., brand new, refurbished).
+ *                 example: "brand new"
+ *               item_description:
+ *                 type: string
+ *                 description: A brief description of the item.
+ *                 example: "A high-quality vintage leather jacket, size XL, in excellent condition."
+ *               base_price:
+ *                 type: number
+ *                 description: The starting price for the auction.
+ *                 example: 150.00
+ *               item_photo:
+ *                 type: string
+ *                 description: URL of the item's photo.
+ *                 example: "images/vintage-leather-jacket.jpg"
+ *               category_id:
+ *                 type: integer
+ *                 description: ID of the category this item belongs to.
+ *                 example: 2
+ *               auction_time:
+ *                 type: string
+ *                 format: date-time
+ *                 description: The time when the auction will start.
+ *                 example: "2024-11-30T12:00:00Z"
+ *     responses:
+ *       200:
+ *         description: Auction item created successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "New auction item created successfully"
+ *       400:
+ *         description: Validation error or bad request.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: boolean
+ *                   example: false
+ *                 error:
+ *                   type: string
+ *                   example: "Item name is required."
+ *       409:
+ *         description: Conflict error when the item already exists.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: boolean
+ *                   example: false
+ *                 error:
+ *                   type: string
+ *                   example: "Item already exists."
+ *       500:
+ *         description: Internal server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: boolean
+ *                   example: false
+ *                 error:
+ *                   type: string
+ *                   example: "Internal server error."
+ */
 router.post('/add-item', addAuctionItem)
 
 
