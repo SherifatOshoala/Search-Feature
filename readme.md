@@ -114,3 +114,7 @@ The response will include the filtered and sorted auction items:
     ...
   ]
 }
+
+---Swagger Documentation---
+This API is documented using Swagger for easy exploration and testing.
+You can view it through: http://localhost:2012/api-docs

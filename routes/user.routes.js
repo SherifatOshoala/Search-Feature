@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {getAuctionItems} = require('../controllers/user.controllers')
+const {getAuctionItems, addCategory, addAuctionItem} = require('../controllers/user.controllers')
 
 
 /**
@@ -120,6 +120,12 @@ const {getAuctionItems} = require('../controllers/user.controllers')
  *                   example: "Internal server error"
  */
 router.get('/auction-items', getAuctionItems)
+
+
+router.post('/add-category', addCategory)
+
+
+router.post('/add-item', addAuctionItem)
 
 
 

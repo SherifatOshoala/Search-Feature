@@ -15,6 +15,7 @@ const AuctionItems = sequelize.define("AuctionItem",
     item_name: {
         type: DataTypes.STRING(100),
         allowNull: false,
+        unique:true,
         validate: {
             notEmpty: true,
           },

@@ -3,6 +3,7 @@ const { Op } = require("sequelize");
 const {AuctionItems} = require('../models/auction.model')
 const { Categories } = require("../models/category.model");
 const {createError} = require('../utils')
+const {validateAuctionItem, validateCategory} = require('../validations/users.validation')
 
 const getAuctionItems = async(req, res, next) => {
     try{
@@ -114,7 +115,59 @@ const getAuctionItems = async(req, res, next) => {
     }
 }
 
+const addCategory = async(req, res, next) => {
+try{
+  const {name, description} = req.body
+  const validate = validateCategory(req.body)
+  if(validate != undefined) throw new Error(validate.details[0].message)
+  const checkIfCategoryExists = await Categories.findOne({where:{name}})
+  if(checkIfCategoryExists != null) throw createError(409, "Category already exists")
+  const category = {
+       name,
+       description
+    }
+  await Categories.create(category)
+  res.status(200).json({
+      status: true,
+      message: "New category created successfully",
+    })
+}catch(error){
+next(error)
+}
+}
+
+const addAuctionItem = async(req, res, next) => {
+  try{
+    const {item_name, item_condition, item_description, base_price, item_photo, category_id, auction_time} = req.body 
+    const validate = validateAuctionItem(req.body)
+    if(validate != undefined) throw new Error(validate.details[0].message)
+    const checkIfItemExists = await AuctionItems.findOne({where:{item_name}})
+    if(checkIfItemExists != null) throw createError(409, "Item already exists")
+      auction_time = new Date(auction_time)
+      const auctionItem = {
+        item_name, 
+        item_condition, 
+        item_description, 
+        base_price,
+        item_photo, 
+        category_id, 
+        auction_time
+      }
+    await AuctionItems.create(auctionItem)
+    res.status(200).json({
+      status: true,
+      message: "New auction item created successfully",
+    })
+
+  }catch(error){
+    next(error)
+    }
+}
+
+
 
 module.exports= {
-    getAuctionItems 
+    getAuctionItems,
+    addCategory,
+    addAuctionItem
 }
