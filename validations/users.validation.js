@@ -17,7 +17,7 @@ const validateAuctionItem = (data) => {
   
   const validateCategory = (data) => {
     const validateCategorySchema = Joi.object({
-        name: Joi.string().min(3).max(50).required(),
+        name: Joi.string().alphanum().min(3).max(50).required(),
         description: Joi.string().max(255).optional()
   })
     const { error } = validateCategorySchema.validate(data);
