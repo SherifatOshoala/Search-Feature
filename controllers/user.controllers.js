@@ -138,7 +138,7 @@ next(error)
 
 const addAuctionItem = async(req, res, next) => {
   try{
-    const {item_name, item_condition, item_description, base_price, item_photo, category_id, auction_time} = req.body 
+    let {item_name, item_condition, item_description, base_price, item_photo, category_id, auction_time} = req.body 
     const validate = validateAuctionItem(req.body)
     if(validate != undefined) throw new Error(validate.details[0].message)
     const checkIfItemExists = await AuctionItems.findOne({where:{item_name}})
