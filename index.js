@@ -29,7 +29,7 @@ app.get('/', (req, res) =>{
 try {
     (async()=> {
       await sequelize.authenticate();
-      // await sequelize.sync({force:true});
+      await sequelize.sync();
       console.log('Connection has been established successfully.');
       app.listen(port, () => {
         displayRoutes(app)
