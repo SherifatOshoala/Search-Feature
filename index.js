@@ -1,7 +1,7 @@
 require("dotenv").config()
 const Express = require('express')
 const app = Express()
-const port = process.env.APP_PORT || 3000
+const port = process.env.PORT || 3000
 const displayRoutes = require('express-routemap')
 const sequelize = require('./config/sequelize')
 const user = require('./routes/user.routes')
